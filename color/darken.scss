@@ -1,0 +1,17 @@
+@use 'sass:list';
+@use 'sass:math';
+@use 'color-to-hsv' as *;
+@use 'hsv-to-color' as *;
+
+@function darken($color, $coeff) {
+  $hsv: to-hsv($color);
+  $h: list.nth($hsv, 1);
+  $s: list.nth($hsv, 2);
+  $v: list.nth($hsv, 3);
+
+  $v: ($v * (1 - $coeff));;
+
+  $hsv: ($h, $s, $v);
+
+  $color: hsv-to-color($hsv);
+}
