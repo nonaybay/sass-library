@@ -3,11 +3,7 @@
 
 
 
-@function linearize($component, $is-rgb: false) {
-  @if $is-rgb {
-    $component: math.div($component, nnb-constants.$MAX_RGB);
-  }
-
+@function linearize($component) {
   @if ($component < nnb-constants.$BETA_DELTA) {
     @return math.div($component, nnb-constants.$DELTA);
   } @else {
