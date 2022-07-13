@@ -1,0 +1,16 @@
+@use 'sass:math';
+@use 'constants' as nnb-constants;
+
+
+
+@function linearize($component, $is-rgb: false) {
+  @if $is-rgb {
+    $component: math.div($component, nnb-constants.$MAX_RGB);
+  }
+
+  @if ($component < nnb-constants.$BETA_DELTA) {
+    @return math.div($component, nnb-constants.$DELTA);
+  } @else {
+    @return math.pow(math.div(($component + nnb-constants.$MIN_ALPHA), $MAX_ALPHA), $MAX_GAMMA);
+  }
+}
