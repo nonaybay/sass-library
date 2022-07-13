@@ -2,8 +2,6 @@
 @use 'sass:math';
 @use 'constants' as const;
 
-
-
 @function to-hsv($color) {
   $r: color.red($color);
   $g: color.green($color);

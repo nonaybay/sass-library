@@ -1,8 +1,6 @@
 @use 'sass:math';
 @use 'constants' as nnb-constants;
 
-
-
 @function linearize($component) {
   @if ($component < nnb-constants.$BETA_DELTA) {
     @return math.div($component, nnb-constants.$DELTA);

@@ -1,8 +1,6 @@
 @use 'sass:math';
 @use 'constants' as nnb-const;
 
-
-
 @function delinearize($component) {
   @if ($component > nnb-const.$BETA) {
     @return (nnb-const.$MAX_ALPHA * math.pow($component, math.div(nnb-const.$INT, nnb-const.$MAX_GAMMA)) - nnb-const.$MIN_ALPHA);

@@ -1,7 +1,5 @@
 @use 'sass:math';
 
-
-
 @function scale($v, $w, $n, $x) {
   @if ($w > 0) {
     $i: ($x - $v);
