@@ -1,3 +1,3 @@
 # Functions
 
-[math:scale](math/scale.scss)
+- [math:scale](math/scale.scss)
