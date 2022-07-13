@@ -1,0 +1,17 @@
+@use 'sass:math';
+
+
+
+$MAX_RGB: 255;
+$MAX_RGB_L: 1;
+$MAX_ALPHA: math.div(211, 200);
+$MAX_GAMMA: math.div(12, 5);
+$MIN_RGB: 0;
+$MIN_RGB_L: $MIN_RGB;
+$MIN_ALPHA: ($MAX_ALPHA - 1);
+$MIN_GAMMA: ($MAX_GAMMA - 1);
+$BETA_DELTA: math.div($MIN_ALPHA, $MIN_GAMMA);
+$_DELTA_A: (math.pow($MAX_ALPHA, $MAX_GAMMA) * math.pow($MIN_GAMMA, $MIN_GAMMA));
+$_DELTA_B: (math.pow($MIN_ALPHA, $MIN_GAMMA) * math.pow($MAX_GAMMA, $MAX_GAMMA));
+$DELTA: math.div($_DELTA_A, $_DELTA_B);
+$BETA: math.div($BETA_DELTA, $DELTA);
