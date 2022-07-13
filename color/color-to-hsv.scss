@@ -5,43 +5,33 @@
 
 
 @function to-hsv($color) {
-  $r: math.div(color.red($color), const.$MAX_RGB);
-  $g: math.div(color.green($color), const.$MAX_RGB);
-  $b: math.div(color.blue($color), const.$MAX_RGB);
-
-  $vn: math.min($r, $g, $b);
-  $vx: math.max($r, $g, $b);
-  $dx: ($vx - $vn);
-
-  // declare empty variables
+  $r: color.red($color);
+  $g: color.green($color);
+  $b: color.blue($color);
+  // ! Create empty variables
   $h: NaN;
-  $s: Nan;
-  $v: $vx;
+  $s: NaN;
+  $v: NaN;
+  
+  $x: math.max($r, $g, $b);
+  $n: math.min($r, $g, $b);
+  $d: ($x - $n);
 
-  @if ($dx == 0) {
-    $h: 0;
-    $s: 0;
-  } @else {
-    $s: math.div($dx, $vx);
-
-    $dr: math.div(math.div(($vx - $r), 6) + math.div($dx, 2), $dx);
-    $dg: math.div(math.div(($vx - $g), 6) + math.div($dx, 2), $dx);
-    $db: math.div(math.div(($vx - $b), 6) + math.div($dx, 2), $dx);
-
-    @if ($r == $vx) {
-      $h: ($db - $dg);
-    } @else if ($g == $vx) {
-      $h: math.div(1, 3) + $dr - $db;
-    } @else if ($b == $vx) {
-      $h: math.div(2, 3) + $dg - $dr;
-    }
+  // Calc HUE
+  @if ($d == 0) {
+    $h: const.$MIN_HUE;
+  } @else if ($r == $x) {
+    $h: math.div(($g - $b), $d) % 6;
+  } @else if ($g == $x) {
+    $h: math.div(($b - $r), $d) + 2;
+  } @else if ($b == $x) {
+    $h: math.div(($r - $g), $d) + 4;
   }
 
-  $h: if(($h < 0), ($h + 1), if($h > 1), ($h - 1), $h);
-
-  $h: (($h * 360) % 360);
-  $s: ($s * 100);
-  $v: ($v * 100);
+  $h: math.round($h * 60);
+  $h: if(($h < const.$MIN_HUE), ($h + const.$MAX_HUE), $h);
+  $s: math.round(if(($x == const.$MIN_SAT), const.$MIN_SAT, math.div($d, $x)) * const.$MAX_SAT);
+  $v: math.round(math.div($x, const.$MAX_RGB) * const.$MAX_LIG);
 
   $hsv: ($h, $s, $v);
 
