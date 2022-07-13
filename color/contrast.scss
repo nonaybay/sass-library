@@ -1,0 +1,12 @@
+@use 'sass:math';
+@use 'luminance' as *;
+
+@function contrast-ratio($a, $b) {
+  $la: luminance($a);
+  $lb: luminance($b);
+  
+  $n: math.min($la, $lb) + 0.05;
+  $x: math.max($la, $lb) + 0.05;
+
+  @return math.div($x, $n);
+}
