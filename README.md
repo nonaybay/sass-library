@@ -1,1 +1,3 @@
-<pre>additional functions to use in your <strong>sass</strong></pre>
+# Functions
+
+[math:scale](math/scale.scss)
