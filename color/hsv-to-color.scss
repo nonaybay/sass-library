@@ -1,0 +1,31 @@
+@use 'sass:list';
+@use 'sass:math';
+@use 'constants' as const;
+
+@function hsv-to-color($hsv) {
+  $h: list.nth($hsv, 1);
+  $s: list.nth($hsv, 2);
+  $v: list.nth($hsv, 3);
+
+  $s: math.div($s, const.$MAX_SAT);
+  $v: math.div($v, const.$MAX_LIG);
+
+  $l: ((2 - $s) * $v);
+  $sl: ($s * $v);
+
+  @if ($l <= 1) {
+    $sl: math.div($sl, $l);
+  } @else {
+    $sl: math.div($sl, (2 - $l));
+  }
+
+  $l: math.div($l, 2);
+
+  $h: $h;
+  $s: ($sl * const.$MAX_SAT * 1%);
+  $l: ($l * const.$MAX_LIG * 1%);
+
+  $color: hsl($h, $s, $l);
+
+  @return $color;
+}
