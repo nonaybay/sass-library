@@ -2,14 +2,15 @@
 
 
 
+$INT: 1;
 $MAX_RGB: 255;
-$MAX_RGB_L: 1;
+$MAX_RGB_L: $INT;
 $MAX_ALPHA: math.div(211, 200);
 $MAX_GAMMA: math.div(12, 5);
 $MIN_RGB: 0;
 $MIN_RGB_L: $MIN_RGB;
-$MIN_ALPHA: ($MAX_ALPHA - 1);
-$MIN_GAMMA: ($MAX_GAMMA - 1);
+$MIN_ALPHA: ($MAX_ALPHA - $INT);
+$MIN_GAMMA: ($MAX_GAMMA - $INT);
 $BETA_DELTA: math.div($MIN_ALPHA, $MIN_GAMMA);
 $_DELTA_A: (math.pow($MAX_ALPHA, $MAX_GAMMA) * math.pow($MIN_GAMMA, $MIN_GAMMA));
 $_DELTA_B: (math.pow($MIN_ALPHA, $MIN_GAMMA) * math.pow($MAX_GAMMA, $MAX_GAMMA));
