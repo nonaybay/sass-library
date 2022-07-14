@@ -1,0 +1,8 @@
+@use "sass:list";
+
+@function nnb_matrix($matrix, $row, $col) {
+  $row: list.nth($matrix, $row);
+  $col: list.nth($row, $col);
+
+  @return $col;
+}
