@@ -2,6 +2,7 @@
 
 //  About abbreviations
 //
+//  As prefix:
 //    x ~>  maximum
 //    n ~>  minimum
 //    l ~>  linear  [in most cases it is a range between 0 and 1]
@@ -16,6 +17,20 @@ $N_RGB: 0;
 $N_RGB_L: $N_RGB;
 $N_ALPHA: ($X_ALPHA - $INT);
 $N_GAMMA: ($X_GAMMA - $INT);
+
+$X_HSL_H: 360;
+$X_HSL_S: 100;
+$X_HSL_L: $X_HSL_S;
+$X_HSV_H: $X_HSL_H;
+$X_HSV_S: $X_HSL_S;
+$X_HSV_V: $X_HSL_L;
+
+$N_HSL_H: $N_RGB;
+$N_HSL_S: $N_RGB;
+$N_HSL_L: $N_HSL_S;
+$N_HSV_H: $N_HSL_H;
+$N_HSV_S: $N_HSL_S;
+$N_HSV_V: $N_HSL_L;
 
 $BETADELTA: math.div($N_ALPHA, $N_GAMMA);
 $_DELTA_TL: math.pow($X_ALPHA, $N_GAMMA);

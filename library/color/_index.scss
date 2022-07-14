@@ -1,1 +1,38 @@
+@use 'sass:color';
+@use 'sass:math';
 @use 'constants' as CONST;
+
+@function to-hsv($color) {
+  $r: color.red($color);
+  $g: color.green($color);
+  $b: color.blue($color);
+
+  $h: NaN;
+
+  $max: math.max($r, $g, $b);
+  $min: math.min($r, $g, $b);
+  $delta: ($max - $min);
+
+  @if ($delta == 0) {
+    $h: CONST.$N_HSV_H;
+  } @else if ($r == $max) {
+    $h: (math.div(($g - $b), $delta) % 6);
+  } @else if ($g == $max) {
+    $h: (math.div(($b - $r), $delta) + 2);
+  } @else if ($b == $max) {
+    $h: (math.div(($r - $g), $delta) + 4);
+  }
+
+  $h: math.round($h * 60);
+
+  @if ($h < CONST.$N_HSV_H) {
+    $h: ($h + CONST.$X_HSV_H);
+  }
+
+  $s: math.round(if(($max == 0), 0, math.div($delta, $max)) * CONST.$X_HSV_S);
+  $v: math.round(math.div($max, CONST.$X_RGB) * 100);
+
+  $hsv: ($h, $s, $v);
+
+  @return $hsv;
+}
