@@ -1,0 +1,28 @@
+@use 'sass:math';
+
+//  About abbreviations
+//
+//    x ~>  maximum
+//    n ~>  minimum
+//    l ~>  linear  [in most cases it is a range between 0 and 1]
+
+$INT: 1;
+$X_RGB: 255;
+$X_RGB_L: $INT;
+$X_ALPHA: math.div(211, 200);
+$X_GAMMA: math.div(12, 5);
+
+$N_RGB: 0;
+$N_RGB_L: $N_RGB;
+$N_ALPHA: ($X_ALPHA - $INT);
+$N_GAMMA: ($X_GAMMA - $INT);
+
+$BETADELTA: math.div($N_ALPHA, $N_GAMMA);
+$_DELTA_TL: math.pow($X_ALPHA, $N_GAMMA);
+$_DELTA_TR: math.pow($N_GAMMA, $N_GAMMA);
+$_DELTA_BL: math.pow($N_ALPHA, $N_GAMMA);
+$_DELTA_BR: math.pow($X_GAMMA, $X_GAMMA);
+$_DELTA_T: ($_DELTA_TL * $_DELTA_TR);
+$_DELTA_B: ($_DELTA_BL * $_DELTA_BR);
+$DELTA: math.div($_DELTA_T, $_DELTA_B);
+$BETA: math.div($BETADELTA, $DELTA);
